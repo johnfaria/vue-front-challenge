@@ -4,7 +4,7 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: "myapp-front" # set this to your application's name
+  AZURE_WEBAPP_NAME: "myappci-front" # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: "dist" # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: "12.x" # set this to the node version to use
 
@@ -27,10 +27,10 @@ jobs:
         run: |
           yarn
           yarn build
-          yarn test
+#          yarn test
       - name: "Deploy to Azure WebApp"
         uses: azure/webapps-deploy@v1
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.PORTAL_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
