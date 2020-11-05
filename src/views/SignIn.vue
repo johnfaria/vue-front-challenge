@@ -29,11 +29,15 @@
                   :error-messages="errors"
                   label="Password"
                   required
+                  :type="'password'"
                 ></v-text-field>
               </validation-provider>
               <v-btn class="mr-4" type="submit" :disabled="invalid">
                 submit
               </v-btn>
+              <span class="red--text" v-if="loginError"
+                >Email ou senha incorretos!</span
+              >
             </form>
           </validation-observer>
         </v-card-text>
@@ -57,7 +61,7 @@ setInteractionMode('eager')
 
 extend('required', {
   ...required,
-  message: '{_field_} can not be empty'
+  message: 'Este campo não pode estar vazio'
 })
 
 extend('max', {
@@ -67,7 +71,7 @@ extend('max', {
 
 extend('email', {
   ...email,
-  message: 'Email must be valid'
+  message: 'Insira um email válido'
 })
 
 export default {
@@ -80,21 +84,29 @@ export default {
   },
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    loginError: false,
+    show: false
   }),
 
   methods: {
     async submit() {
       this.$refs.observer.validate()
-      const response = await HTTP.post(`/auth/signin`, {
-        email: this.email,
-        password: this.password
-      })
+      try {
+        const response = await HTTP.post(`/auth/signin`, {
+          email: this.email,
+          password: this.password
+        })
 
-      if (response.status === 200) {
-        this.userinfo.token = response.headers['auth-token']
-        this.userinfo.data = response.data
-        this.$router.push('/painel')
+        if (response.status === 200) {
+          this.userinfo.token = response.headers['auth-token']
+          this.userinfo.data = response.data
+          this.$router.push('/painel')
+        }
+      } catch (error) {
+        if (error.response.data.message) {
+          this.loginError = true
+        }
       }
     }
   }
