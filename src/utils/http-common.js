@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const HTTP = axios.create({
-  baseURL: `http://myapp-ci.azurewebsites.net`
+  baseURL: `https://myapp-ci.azurewebsites.net`
 })
