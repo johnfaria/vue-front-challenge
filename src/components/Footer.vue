@@ -2,11 +2,16 @@
   <v-footer dark padless>
     <v-card class="flex" flat tile>
       <v-card-title class="teal">
-        <strong class="subheading">Visite este projeto no GitHub</strong>
+        <strong class="subheading">Visite o projeto no Github</strong>
 
         <v-spacer></v-spacer>
 
-        <v-btn v-for="icon in icons" :key="icon" class="mx-4" dark icon>
+        <v-btn
+          class="mx-4"
+          dark
+          icon
+          href="https://github.com/johnfaria/dev-hiring-challenge"
+        >
           <v-icon size="24px">
             {{ icon }}
           </v-icon>
@@ -14,7 +19,7 @@
       </v-card-title>
 
       <v-card-text class="py-2 white--text text-center">
-        {{ new Date().getFullYear() }} — <strong>Made by John</strong>
+        {{ new Date().getFullYear() }} — <strong>John Faria</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -23,7 +28,7 @@
 <script>
 export default {
   data: () => ({
-    icons: ['mdi-github']
+    icon: 'mdi-github'
   })
 }
 </script>
