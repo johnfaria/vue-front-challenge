@@ -1,17 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import PageNotFound from '../views/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/signin',
+    alias: '/',
     name: 'SignIn',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -36,6 +32,10 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/Painel.vue')
+  },
+  {
+    path: '*',
+    component: PageNotFound
   }
 ]
 
