@@ -7,7 +7,12 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn to="/signin">
+      <v-btn v-if="userinfo.token" to="/signin" @click="deleteToken">
+        <span class="mr-2">Logout</span>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
+
+      <v-btn v-else to="/signin">
         <span class="mr-2">Login</span>
         <v-icon>mdi-account</v-icon>
       </v-btn>
@@ -37,7 +42,13 @@ export default {
       token: '',
       data: {}
     }
-  })
+  }),
+  methods: {
+    deleteToken() {
+      this.userinfo.token = ''
+      this.userinfo.data = {}
+    }
+  }
 }
 </script>
 
