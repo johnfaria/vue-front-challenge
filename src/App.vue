@@ -1,32 +1,48 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app color="dark" dark>
+      <div class="d-flex align-center">
+        <h1>GitHubApp</h1>
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn to="/signin">
+        <span class="mr-2">Login</span>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
+
+      <v-btn to="/signup">
+        <span class="mr-2">Registrar</span>
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view :userinfo="userinfo"></router-view>
+    </v-main>
+    <Footer></Footer>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import Footer from './components/Footer'
+export default {
+  name: 'App',
+  components: {
+    Footer
+  },
+  data: () => ({
+    userinfo: {
+      token: '',
+      data: {}
     }
-  }
+  })
+}
+</script>
+
+<style lang="css">
+#app {
+  background-color: #ebedf0;
 }
 </style>
