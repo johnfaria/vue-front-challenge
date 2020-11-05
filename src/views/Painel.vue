@@ -110,6 +110,8 @@ export default {
     if (!this.userinfo.data.languages) {
       return
     }
+    this.values = this.userinfo.data.languages
+
     const response = await HTTP.post(
       `/api/repos`,
       {
@@ -140,7 +142,6 @@ export default {
 
 .repo-section {
   display: flex;
-  /* background-color: red; */
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
