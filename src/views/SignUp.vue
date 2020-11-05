@@ -58,7 +58,7 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mr-4 green" type="submit" :disabled="invalid">
+              <v-btn class="mr-4" type="submit" :disabled="invalid">
                 Login
               </v-btn>
             </form>

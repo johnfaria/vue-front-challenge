@@ -32,7 +32,7 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mr-4" type="submit" :disabled="invalid">
+              <v-btn type="submit" :disabled="invalid">
                 submit
               </v-btn>
               <span class="red--text" v-if="loginError"
