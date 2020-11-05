@@ -32,7 +32,7 @@
                 <v-text-field
                   v-model="username"
                   :error-messages="errors"
-                  label="Nome de usuário"
+                  label="Nome de Usuário"
                   required
                 ></v-text-field>
               </validation-provider>
@@ -58,7 +58,7 @@
                 <v-text-field
                   v-model="password"
                   :error-messages="errors"
-                  label="Password"
+                  label="Senha"
                   required
                   :type="'password'"
                 ></v-text-field>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-container>
-      <v-card class="pa-10" height="100%">
-        <h1>Bem vindo {{ userinfo.data.fullname }}</h1>
+      <v-card class="pa-10" min-height="30vh">
+        <h1>Bem vindo {{ userinfo.data.fullname }}!</h1>
         <div class="form">
           <validation-observer ref="observer" v-slot="{ invalid }">
             <form>
@@ -26,22 +26,21 @@
                   required
                 ></v-autocomplete>
               </validation-provider>
-              <v-btn class="mr-4" @click="submit" :disabled="invalid">
+              <v-btn class="mb-10" @click="submit" :disabled="invalid">
                 enviar
               </v-btn>
             </form>
           </validation-observer>
         </div>
+        <div class="repo-section">
+          <CardRepo
+            class="repo-element"
+            v-for="value in topRepositories"
+            :repository="value"
+            :key="value.id"
+          ></CardRepo>
+        </div>
       </v-card>
-
-      <div class="repo-section">
-        <CardRepo
-          class="repo-element"
-          v-for="value in topRepositories"
-          :repository="value"
-          :key="value.id"
-        ></CardRepo>
-      </div>
     </v-container>
   </div>
 </template>

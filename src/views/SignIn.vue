@@ -29,7 +29,7 @@
                 <v-text-field
                   v-model="password"
                   :error-messages="errors"
-                  label="Password"
+                  label="Senha"
                   required
                   :type="'password'"
                 ></v-text-field>
