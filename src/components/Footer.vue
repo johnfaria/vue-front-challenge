@@ -2,7 +2,7 @@
   <v-footer dark padless>
     <v-card class="flex" flat tile>
       <v-card-title class="teal">
-        <strong class="subheading">Visite o projeto no Github</strong>
+        <strong class="subheading"></strong>
 
         <v-spacer></v-spacer>
 
@@ -12,7 +12,7 @@
           icon
           href="https://github.com/johnfaria/dev-hiring-challenge"
         >
-          <v-icon size="24px">
+          <v-icon size="40px">
             {{ icon }}
           </v-icon>
         </v-btn>

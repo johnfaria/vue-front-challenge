@@ -2,7 +2,9 @@
   <v-app>
     <v-app-bar app color="dark" dark>
       <div class="d-flex align-center">
-        <h1>GitHubApp</h1>
+        <v-icon large class="mr-3">mdi-github</v-icon>
+        <h1>GitHub Top Stars</h1>
+        <v-icon large class="ml-3 yellow--text">mdi-star</v-icon>
       </div>
 
       <v-spacer></v-spacer>
