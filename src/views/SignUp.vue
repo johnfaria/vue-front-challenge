@@ -2,7 +2,12 @@
   <v-container fill-height>
     <v-row justify="center">
       <v-card class="pa-10" elevation="8" shaped width="600">
-        <v-card-title>Registrar</v-card-title>
+        <v-card-title
+          >Registrar
+          <v-icon large class="ml-3 teal--text"
+            >mdi-account</v-icon
+          ></v-card-title
+        >
         <v-card-text>
           <validation-observer ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="submit">
@@ -58,7 +63,7 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mr-4" type="submit" :disabled="invalid">
+              <v-btn class="mt-4 mr-3" type="submit" :disabled="invalid">
                 Login
               </v-btn>
             </form>

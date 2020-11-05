@@ -1,27 +1,27 @@
 <template>
   <v-app>
-    <v-app-bar app color="dark" dark>
+    <v-app-bar app dark>
       <div class="d-flex align-center">
-        <v-icon large class="mr-3">mdi-github</v-icon>
-        <h1>GitHub Top Stars</h1>
-        <v-icon large class="ml-3 yellow--text">mdi-star</v-icon>
+        <v-icon size="30px" class="mr-3">mdi-github</v-icon>
+        <h2>GitHub Top Stars</h2>
+        <v-icon size="30px" class="ml-3 yellow--text">mdi-star</v-icon>
       </div>
 
       <v-spacer></v-spacer>
 
       <v-btn v-if="userinfo.token" to="/signin" @click="deleteToken">
-        <span class="mr-2">Logout</span>
+        <span>Logout</span>
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
       <v-btn v-else to="/signin">
-        <span class="mr-2">Login</span>
-        <v-icon>mdi-account</v-icon>
+        <span>Login</span>
+        <v-icon class="ml-2" medium>mdi-lock-open</v-icon>
       </v-btn>
 
-      <v-btn to="/signup">
-        <span class="mr-2">Registrar</span>
-        <v-icon>mdi-login</v-icon>
+      <v-btn class="ml-4" to="/signup">
+        <span>Registrar</span>
+        <v-icon class="ml-2">mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
 

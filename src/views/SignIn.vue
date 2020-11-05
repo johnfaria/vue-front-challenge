@@ -2,7 +2,9 @@
   <v-container fill-height>
     <v-row justify="center">
       <v-card class="pa-10" elevation="8" shaped width="600px">
-        <v-card-title>Login</v-card-title>
+        <v-card-title
+          >Login <v-icon large class="ml-3 teal--text">mdi-lock-open</v-icon>
+        </v-card-title>
         <v-card-text>
           <validation-observer ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="submit">
@@ -32,7 +34,7 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn type="submit" :disabled="invalid">
+              <v-btn class="mt-4 mr-3" type="submit" :disabled="invalid">
                 submit
               </v-btn>
               <span class="red--text" v-if="loginError"
