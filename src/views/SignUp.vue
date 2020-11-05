@@ -55,6 +55,7 @@
                   :error-messages="errors"
                   label="Password"
                   required
+                  :type="'password'"
                 ></v-text-field>
               </validation-provider>
               <v-btn class="mr-4 green" type="submit" :disabled="invalid">
@@ -70,7 +71,7 @@
 
 <script>
 import { HTTP } from '../utils/http-common'
-import { required, email, max } from 'vee-validate/dist/rules'
+import { required, email } from 'vee-validate/dist/rules'
 import {
   extend,
   ValidationObserver,
@@ -82,17 +83,12 @@ setInteractionMode('eager')
 
 extend('required', {
   ...required,
-  message: '{_field_} can not be empty'
-})
-
-extend('max', {
-  ...max,
-  message: '{_field_} may not be greater than {length} characters'
+  message: 'Este campo não pode estar vazio'
 })
 
 extend('email', {
   ...email,
-  message: 'Email must be valid'
+  message: 'Insira um email válido'
 })
 
 export default {
