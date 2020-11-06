@@ -3,7 +3,7 @@
     class="mx-auto"
     color="dark"
     dark
-    :href="repository.url"
+    :href="repository.html_url"
     target="_blank"
   >
     <v-card-title>
