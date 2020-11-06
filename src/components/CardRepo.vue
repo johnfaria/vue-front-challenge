@@ -1,5 +1,11 @@
 <template>
-  <v-card class="mx-auto" color="dark" dark>
+  <v-card
+    class="mx-auto"
+    color="dark"
+    dark
+    :href="repository.url"
+    target="_blank"
+  >
     <v-card-title>
       <v-icon large left>
         mdi-github

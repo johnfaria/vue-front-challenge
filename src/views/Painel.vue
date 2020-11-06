@@ -26,9 +26,18 @@
                   required
                 ></v-autocomplete>
               </validation-provider>
-              <v-btn class="mb-10" @click="submit" :disabled="invalid">
-                enviar
+              <v-btn
+                class="mb-10"
+                @click="submit"
+                :disabled="invalid"
+                :loading="loading"
+              >
+                Enviar
               </v-btn>
+              <br />
+              <span class="red--text" v-if="repoError"
+                >Erro ao obter repositórios!</span
+              >
             </form>
           </validation-observer>
         </div>
@@ -86,22 +95,32 @@ export default {
     items: top50languages,
     values: [],
     value: null,
-    topRepositories: []
+    topRepositories: [],
+    loading: false,
+    repoError: false
   }),
   methods: {
     async submit() {
       this.$refs.observer.validate()
-      console.log('submit')
-      const response = await HTTP.post(
-        `/api/repos`,
-        {
-          languages: this.values
-        },
-        { headers: { 'auth-token': this.userinfo.token } }
-      )
+      this.loading = true
+      try {
+        const response = await HTTP.post(
+          `/api/repos`,
+          {
+            languages: this.values
+          },
+          { headers: { 'auth-token': this.userinfo.token } }
+        )
 
-      if (response.status === 200) {
-        this.topRepositories = response.data
+        if (response.status === 200) {
+          this.topRepositories = response.data
+          this.loading = false
+          this.repoError = false
+        }
+      } catch (error) {
+        this.repoError = true
+        this.loading = false
+        this.topRepositories = []
       }
     }
   },
@@ -111,16 +130,21 @@ export default {
     }
     this.values = this.userinfo.data.languages
 
-    const response = await HTTP.post(
-      `/api/repos`,
-      {
-        languages: this.userinfo.data.languages
-      },
-      { headers: { 'auth-token': this.userinfo.token } }
-    )
-    console.log(response.data)
-    if (response.status === 200) {
-      this.topRepositories = response.data
+    try {
+      const response = await HTTP.post(
+        `/api/repos`,
+        {
+          languages: this.userinfo.data.languages
+        },
+        { headers: { 'auth-token': this.userinfo.token } }
+      )
+
+      if (response.status === 200) {
+        this.topRepositories = response.data
+        this.repoError = false
+      }
+    } catch (error) {
+      this.repoError = true
     }
   },
   beforeRouteEnter(to, from, next) {

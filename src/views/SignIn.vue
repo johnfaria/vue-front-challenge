@@ -34,8 +34,13 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mt-4 mr-3" type="submit" :disabled="invalid">
-                submit
+              <v-btn
+                class="mt-4 mr-3"
+                type="submit"
+                :disabled="invalid"
+                :loading="loading"
+              >
+                Login
               </v-btn>
               <span class="red--text" v-if="loginError"
                 >Email ou senha incorretos!</span
@@ -88,12 +93,14 @@ export default {
     email: '',
     password: '',
     loginError: false,
-    show: false
+    show: false,
+    loading: false
   }),
 
   methods: {
     async submit() {
       this.$refs.observer.validate()
+      this.loading = true
       try {
         const response = await HTTP.post(`/auth/signin`, {
           email: this.email,
@@ -108,6 +115,7 @@ export default {
       } catch (error) {
         if (error.response.data.message) {
           this.loginError = true
+          this.loading = false
         }
       }
     }

@@ -63,9 +63,17 @@
                   :type="'password'"
                 ></v-text-field>
               </validation-provider>
-              <v-btn class="mt-4 mr-3" type="submit" :disabled="invalid">
-                Login
+              <v-btn
+                class="mt-4 mr-3"
+                type="submit"
+                :disabled="invalid"
+                :loading="loading"
+              >
+                Registrar
               </v-btn>
+              <span class="red--text" v-if="registerError"
+                >Nome de Usuário ou email já existe!</span
+              >
             </form>
           </validation-observer>
         </v-card-text>
@@ -108,24 +116,33 @@ export default {
     email: '',
     password: '',
     username: '',
-    fullname: ''
+    fullname: '',
+    loading: false,
+    registerError: false
   }),
 
   methods: {
     async submit() {
       this.$refs.observer.validate()
+      this.loading = true
+      try {
+        const response = await HTTP.post(`/auth/signup`, {
+          username: this.username,
+          fullname: this.fullname,
+          email: this.email,
+          password: this.password
+        })
 
-      const response = await HTTP.post(`/auth/signup`, {
-        username: this.username,
-        fullname: this.fullname,
-        email: this.email,
-        password: this.password
-      })
-
-      if (response.status === 200) {
-        this.userinfo.token = response.headers['auth-token']
-        this.userinfo.data = response.data
-        this.$router.push('/painel')
+        if (response.status === 200) {
+          this.userinfo.token = response.headers['auth-token']
+          this.userinfo.data = response.data
+          this.$router.push('/painel')
+        }
+      } catch (error) {
+        this.loading = false
+        if (error.response.data.message.split(' ')[0] === 'duplicate') {
+          this.registerError = true
+        }
       }
     }
   }
