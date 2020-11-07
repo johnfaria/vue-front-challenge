@@ -13,8 +13,8 @@
       <span class="title font-weight-light">{{ repository.name }}</span>
     </v-card-title>
 
-    <v-card-text class="headline font-weight-bold">
-      {{ repository.description }}
+    <v-card-text class="subtitle font-weight-bold">
+      {{ repository.description | truncate }}
     </v-card-text>
 
     <v-card-actions>
@@ -40,8 +40,14 @@ export default {
   props: {
     repository: Object
   },
-  data: () => ({
-    //
-  })
+  filters: {
+    truncate: function(text) {
+      if (text.length > 120) {
+        return text.substring(0, 120) + '...'
+      } else {
+        return text
+      }
+    }
+  }
 }
 </script>
